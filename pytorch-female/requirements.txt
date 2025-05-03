@@ -1,0 +1,32 @@
+black~=22.0
+flake8>=3.7.9, <5.0
+ipython>=7.31.1, <8.0
+isort~=5.0
+jupyter~=1.0
+jupyterlab~=3.0
+kedro~=0.18.3
+kedro-telemetry~=0.2.0
+nbstripout~=0.4
+pytest-cov~=3.0
+pytest-mock>=1.7.1, <2.0
+pytest~=6.2
+
+tqdm==4.64.1
+supervisely==6.69.5
+iterative-stratification==0.1.7
+seaborn==0.12.0
+pycocotools==2.0.6
+# torch==1.12.1+cpu  # there will be no models trained in this project - hence CPU is fine for datasets testing
+# torch==1.12.1+cu102
+# torchaudio==0.12.1+cu102
+# torchmetrics==0.11.0
+# torchvision==0.13.1+cu102
+mlflow==2.12.2
+# pytorch-lightning==1.9.4
+pytorch-lightning==2.2.4
+torch==2.3.0
+torchaudio==2.3.0
+torchvision==0.18.0
+pycocotools==2.0.6
+gitpython
+ultralytics==8.2.79

@@ -1,0 +1,80 @@
+# Exclude the data folder
+data/
+
+# Exclude the tb_logs folder
+tb_logs/
+
+# Exclude the data_vilen folder
+data_vilen/
+
+# Exclude all .ckpt files
+*.ckpt
+
+# Exclude Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Exclude Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Exclude Jupyter Notebook cache folders
+**/.ipynb_checkpoints/
+**/.jupyter_cache/
+
+# Exclude environment files
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Exclude log files
+*.log
+
+# Exclude any temporary files created by editors
+*.swp
+*.swo
+*~
+
+# Exclude any temporary files created by the OS
+.DS_Store
+Thumbs.db
+
+# Exclude compiled binary files
+*.dll
+*.so
+*.dylib
+
+# Exclude package manager directories
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Exclude build directories
+build/
+dist/
+*.egg-info/
+
+# Exclude virtual machine images
+*.vdi
+*.vbox
+*.vbox-prev
+
+# Exclude archives
+*.tar
+*.gz
+*.zip
+*.7z
+*.bz2
+*.rar
+*.tgz
+*.xz
+
+# Exclude IDE and editor configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

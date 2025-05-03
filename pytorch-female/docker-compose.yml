@@ -1,0 +1,68 @@
+# version: '2.3'
+version: '3.8'
+services:
+
+  female_pytorch_models_eval:
+    build: .
+    # runtime: nvidia
+    shm_size: '32gb'
+    ports:
+      - "0.0.0.0:8860:8888"
+    networks:
+      # - ml_flow_local_deploy_ml_flow_network      # Use the ml_flow_network
+      - mlflow_local2_mlflow-network
+
+    volumes:
+       - ./:/mnt:rw
+       - /home/andrey/works/rtu/endometriosis/rtu_win/Endometriosis/Datasets:/mnt/data/01_raw/supervisely_folder:rw
+       - /home/andrey/works/rtu/endometriosis/female-data-eval:/mnt/female-data-eval:rw
+       - /home/andrey/works/rtu/endometriosis/vilen/FEMaLe/pipelines/female-data-eval/data:/mnt/data_vilen
+       - /home/andrey/works/rtu/endometriosis/Endo_Addon_Data/CholecSeq8k_YOLOv8:/mnt/data/01_raw/CholecSeq8k_YOLOv8
+       - /home/andrey/works/rtu/endometriosis/Endo_Addon_Data/SurgicalSceneSegmentationInRoboticGastrectomy:/mnt/data/01_raw/SurgicalSceneSegmentationInRoboticGastrectomy
+    entrypoint: bash -c "cd /mnt && jupyter notebook --NotebookApp.token='' --ip=0.0.0.0 --allow-root && /bin/bash" 
+
+    stdin_open: true
+    tty: true
+    environment:
+       - NVIDIA_VISIBLE_DEVICES=[1]
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 2
+              capabilities: [gpu]
+
+
+networks:
+  mlflow_local2_mlflow-network:
+    external: true
+
+# version: '2.3'
+# services:
+
+#   female_pytorch_models_eval:
+#     build: .
+#     runtime: nvidia
+#     shm_size: '32gb'
+#     network_mode: bridge
+#     ports:
+#       - "0.0.0.0:8860:8888"
+#     networks:
+#       - ml_flow_network      # Use the ml_flow_network
+
+#     volumes:
+#        - ./:/mnt:rw
+#        - /home/andrey/works/rtu/endometriosis/rtu_win/Endometriosis/Datasets:/mnt/data/01_raw/supervisely_folder:rw
+#       #  - ../rtu_win/Endometriosis/Datasets:/mnt/Datasets:rw
+#        - /home/andrey/works/rtu/endometriosis/female-data-eval:/mnt/female-data-eval:rw
+#     entrypoint: bash -c "cd /mnt && jupyter notebook --NotebookApp.token='' --ip=0.0.0.0 --allow-root && /bin/bash" 
+
+#     stdin_open: true
+#     tty: true
+
+
+# networks:
+#   ml_flow_network:
+#     external: true

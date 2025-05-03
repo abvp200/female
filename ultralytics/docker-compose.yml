@@ -1,0 +1,39 @@
+# version: '2.3'
+version: '3.8'
+services:
+
+   ultralitics:
+      build: .
+      # runtime: nvidia
+      shm_size: '32gb'
+      ports:
+         - "0.0.0.0:8829:8888"
+         - "0.0.0.0:7861:7860"
+      networks:
+         - mlflow_local2_mlflow-network      # Use the ml_flow_network
+         
+      environment:
+         - NVIDIA_VISIBLE_DEVICES=1,0
+
+      volumes:
+       - ./:/mnt:rw
+       - /home/andrey/works/rtu/endometriosis/rtu_win/Endometriosis/Datasets:/mnt/data/01_raw/supervisely_folder:rw
+       - /home/andrey/works/rtu/endometriosis/female-data-eval:/mnt/female-data-eval:rw
+       - /home/andrey/works/rtu/endometriosis/vilen/FEMaLe/pipelines/female-data-eval/data:/mnt/data_vilen
+
+      entrypoint: bash -c "cd /mnt && jupyter notebook --NotebookApp.token='' --ip=0.0.0.0 --allow-root && /bin/bash" 
+
+      stdin_open: true
+      tty: true
+
+      deploy:
+        resources:
+          reservations:
+            devices:
+              - driver: nvidia
+                count: 1
+                capabilities: [gpu]
+
+networks:
+  mlflow_local2_mlflow-network:
+    external: true
